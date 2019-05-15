@@ -32,7 +32,7 @@ def custom_threshold(image):
     cv.namedWindow("binary2", cv.WINDOW_NORMAL)
     cv.imshow("binary2", binary)
 
-src = cv.imread('5.jpg')
+src = cv.imread('processing_image1.jpg')
 cv.namedWindow('input_image', cv.WINDOW_NORMAL) #设置为WINDOW_NORMAL可以任意缩放
 cv.imshow('input_image', src)
 threshold_demo(src)
