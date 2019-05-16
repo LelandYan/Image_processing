@@ -15,12 +15,8 @@ _,contours, hierarchy = cv2.findContours(closed, cv2.RETR_TREE, cv2.CHAIN_APPROX
 
 cv2.drawContours(img, contours, -1, (0, 0, 255), 3)
 
-cv2.namedWindow('demo', 0)
-cv2.imshow("demo", img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
+plt.imshow(img)
+plt.show()
 #
 #
 #
@@ -76,5 +72,5 @@ cv2.destroyAllWindows()
 # plt.title('edge'),plt.xticks([]),plt.yticks([])
 #
 # plt.show()
-
-
+#
+#

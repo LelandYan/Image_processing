@@ -6,8 +6,8 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-# img = cv2.imread("1.jpg")
-img = cv2.imread("processing_image1.jpg")
+img = cv2.imread("1.jpg")
+# img = cv2.imread("processing_image1.jpg")
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 # img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 closed = cv2.erode(img, None, iterations=5)
@@ -22,14 +22,17 @@ img_blackhat = cv2.morphologyEx(img, op= cv2.MORPH_BLACKHAT, kernel=kernel)
 # Plot the images
 images = [img, img_open, img_close, img_grad,
           img_tophat, img_blackhat]
-# fig, axs = plt.subplots(nrows = 2, ncols = 3, figsize = (15, 15))
-# for ind, p in enumerate(images):
-#     ax = axs[ind//3, ind%3]
-#     ax.imshow(p, cmap = 'gray')
-#     ax.axis('off')
-# plt.show()
-img_grad = cv2.cvtColor(img_grad,cv2.COLOR_BAYER_BG2BGR)
-cv2.imwrite("the_first_image_cutting_processing_2.jpg",img_grad)
+names = ["raw_img","img_open","img_close","img_grad","img_tophat","img_blackhat"]
+fig, axs = plt.subplots(nrows = 2, ncols = 3, figsize = (15, 15))
+for ind, p in enumerate(images):
+    ax = axs[ind//3, ind%3]
+    ax.imshow(p, cmap = 'gray')
+    ax.set_title(names[ind])
+    ax.axis('off')
+plt.show()
+
+# img_grad = cv2.cvtColor(img_grad,cv2.COLOR_BAYER_BG2BGR)
+# cv2.imwrite("the_first_image_cutting_processing_2.jpg",img_grad)
 
 
 # gray = cv2.cvtColor(img_tophat,cv2.COLOR_BAYER_GR2GRAY)
