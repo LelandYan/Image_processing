@@ -5,11 +5,17 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 import copy
+from pylab import mpl
+
+# 防止中文乱码
+mpl.rcParams['font.sans-serif'] = ['SimHei']
+
 
 class processing_image:
-    def __init__(self, filename="./raw_data/1.jpg",output="./out_data"):
+    def __init__(self, filename="./raw_data/1.jpg", output="./out_data"):
         self.filename = filename
         self.output = output
+
     def op_gray_to_four_type(self, kernel=(9, 9), erode_iter=5, dilate_iter=5):
 
         img = cv2.imread(self.filename)
@@ -34,7 +40,7 @@ class processing_image:
         images = [img, img_open, img_close, img_grad,
                   img_tophat, img_blackhat]
         names = ["raw_img", "img_open", "img_close", "img_grad", "img_tophat", "img_blackhat"]
-        #cv2.imwrite(self.output+"/gradient_image1.jpg",img_grad)
+        # cv2.imwrite(self.output+"/gradient_image1.jpg",img_grad)
         fig, axs = plt.subplots(nrows=2, ncols=3, figsize=(15, 15))
         for ind, p in enumerate(images):
             ax = axs[ind // 3, ind % 3]
@@ -43,14 +49,14 @@ class processing_image:
             ax.axis('off')
         plt.show()
 
-    def op_first_to_three_type(self,flag=False):
+    def op_first_to_three_type(self, flag=False):
         # 全局阈值
         def threshold_demo(image):
             gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)  # 把输入图像灰度化
             # 直接阈值化是对输入的单通道矩阵逐像素进行阈值分割。
             ret, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_TRIANGLE)
             if flag:
-                cv2.imwrite(self.output+"/global_binary_first1.jpg", binary)
+                cv2.imwrite(self.output + "/global_binary_first1.jpg", binary)
             return binary
 
         # 局部阈值
@@ -59,7 +65,7 @@ class processing_image:
             # 自适应阈值化能够根据图像不同区域亮度分布，改变阈值
             binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 25, 10)
             if flag:
-                cv2.imwrite(self.output+"/local_binary_first1.jpg", binary)
+                cv2.imwrite(self.output + "/local_binary_first1.jpg", binary)
             return binary
 
         # 用户自己计算阈值
@@ -70,8 +76,9 @@ class processing_image:
             mean = m.sum() / (w * h)
             ret, binary = cv2.threshold(gray, mean, 255, cv2.THRESH_BINARY)
             if flag:
-                cv2.imwrite(self.output+"/custom_binary_first1.jpg", binary)
+                cv2.imwrite(self.output + "/custom_binary_first1.jpg", binary)
             return binary
+
         if flag:
             src = cv2.imread("./raw_data/gray_cutting_image1.jpg")
         else:
@@ -122,7 +129,7 @@ class processing_image:
         raw_img = raw_img[0:h - hight, x1:x1 + width]
         cv2.imwrite(self.output + "/raw_draw_image1.jpg", draw_img)
         cv2.imwrite(self.output + "/raw_cutting_image1.jpg", raw_img)
-        cv2.imwrite(self.output+"/gray_cutting_image1.jpg",crop_img)
+        cv2.imwrite(self.output + "/gray_cutting_image1.jpg", crop_img)
 
     def op_edge_test(self):
         def gray_dege_test():
@@ -138,51 +145,52 @@ class processing_image:
             cv2.drawContours(img, contours, -1, (0, 0, 255), 3)
             plt.imshow(img)
             plt.show()
-            cv2.imwrite(self.output+"/gray_edge_test.jpg", img)
+            cv2.imwrite(self.output + "/gray_edge_test.jpg", img)
 
         def fourier_edge_test():
-            img = cv2.imread('./raw_data/gradient_image1.jpg',0)
+            img = cv2.imread('./raw_data/gradient_image1.jpg', 0)
             f = np.fft.fft2(img)
             fshift = np.fft.fftshift(f)
 
-            rows,cols = img.shape
-            crow,ccol = int(rows/2) , int(cols/2)
-            for i in range(crow-30,crow+30):
-                for j in range(ccol-30,ccol+30):
-                    fshift[i][j]=0.0
+            rows, cols = img.shape
+            crow, ccol = int(rows / 2), int(cols / 2)
+            for i in range(crow - 30, crow + 30):
+                for j in range(ccol - 30, ccol + 30):
+                    fshift[i][j] = 0.0
             f_ishift = np.fft.ifftshift(fshift)
-            img_back = np.fft.ifft2(f_ishift)#进行高通滤波
+            img_back = np.fft.ifft2(f_ishift)  # 进行高通滤波
             # 取绝对值
             img_back = np.abs(img_back)
-            plt.subplot(121),plt.imshow(img,cmap = 'gray')#因图像格式问题，暂已灰度输出
+            plt.subplot(121), plt.imshow(img, cmap='gray')  # 因图像格式问题，暂已灰度输出
             plt.title('Input Image'), plt.xticks([]), plt.yticks([])
-            #先对灰度图像进行伽马变换，以提升暗部细节
-            rows,cols = img_back.shape
-            gamma=copy.deepcopy(img_back)
-            rows=img.shape[0]
-            cols=img.shape[1]
+            # 先对灰度图像进行伽马变换，以提升暗部细节
+            rows, cols = img_back.shape
+            gamma = copy.deepcopy(img_back)
+            rows = img.shape[0]
+            cols = img.shape[1]
             for i in range(rows):
                 for j in range(cols):
-                    gamma[i][j]=5.0*pow(gamma[i][j],0.34)#0.34这个参数是我手动调出来的，根据不同的图片，可以选择不同的数值
-            #对灰度图像进行反转
+                    gamma[i][j] = 5.0 * pow(gamma[i][j], 0.34)  # 0.34这个参数是我手动调出来的，根据不同的图片，可以选择不同的数值
+            # 对灰度图像进行反转
 
             for i in range(rows):
                 for j in range(cols):
-                    gamma[i][j]=255-gamma[i][j]
+                    gamma[i][j] = 255 - gamma[i][j]
 
-            plt.subplot(122),plt.imshow(gamma,cmap = 'gray')
+            plt.subplot(122), plt.imshow(gamma, cmap='gray')
             plt.title('Result in HPF'), plt.xticks([]), plt.yticks([])
-            cv2.imwrite(self.output+"/fourier_edge_test_image1.jpg",gamma)
+            cv2.imwrite(self.output + "/fourier_edge_test_image1.jpg", gamma)
             plt.show()
-        def canny_edge_test():
-            img = cv2.imread('./raw_data/gradient_image1.jpg',0)
-            edges = cv2.Canny(img,100,200)
 
-            plt.subplot(121),plt.imshow(img,cmap='gray')
-            plt.title('original'),plt.xticks([]),plt.yticks([])
-            plt.subplot(122),plt.imshow(edges,cmap='gray')
-            plt.title('edge'),plt.xticks([]),plt.yticks([])
-            cv2.imwrite(self.output+"/canny_edge_test_image1.jpg",edges)
+        def canny_edge_test():
+            img = cv2.imread('./raw_data/gradient_image1.jpg', 0)
+            edges = cv2.Canny(img, 100, 200)
+
+            plt.subplot(121), plt.imshow(img, cmap='gray')
+            plt.title('original'), plt.xticks([]), plt.yticks([])
+            plt.subplot(122), plt.imshow(edges, cmap='gray')
+            plt.title('edge'), plt.xticks([]), plt.yticks([])
+            cv2.imwrite(self.output + "/canny_edge_test_image1.jpg", edges)
             plt.show()
 
         gray_dege_test()
@@ -203,7 +211,40 @@ class processing_image:
 
         # Floodfill from point (0, 0)
         cv2.floodFill(im_floodfill, mask, (0, 0), 255)
-        cv2.imwrite(self.output+"/edge_processing1.jpg",im_floodfill)
+        cv2.imwrite(self.output + "/edge_processing1.jpg", im_floodfill)
+
+    def op_counter(self):
+        ob1 = cv2.imread("./raw_data/edge_processing1.jpg", cv2.IMREAD_GRAYSCALE)
+        # person_1 = cv2.erode(person_1, None, iterations=2)
+        # person_1 = cv2.dilate(person_1, None, iterations=2)
+        ob2 = cv2.imread("./raw_data/icon4.jpg", cv2.IMREAD_GRAYSCALE)
+        # person_2 = cv2.erode(person_2, None, iterations=5)
+        # person_2 = cv2.dilate(person_2, None, iterations=2)
+        # orb = cv2.xfeatures2d.SURF_create()
+        orb = cv2.xfeatures2d.SIFT_create()
+        keyp1, desp1 = orb.detectAndCompute(ob1, None)
+        keyp2, desp2 = orb.detectAndCompute(ob2, None)
+        FLANN_INDEX_KDTREE = 1
+        index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
+        search_params = dict(checks=50)
+        flann = cv2.FlannBasedMatcher(index_params, search_params)
+        matches = flann.knnMatch(desp1, desp2, k=2)
+        matchesMask = [[0, 0] for i in range(len(matches))]
+        for i, (m, n) in enumerate(matches):
+            if m.distance < 0.7 * n.distance:
+                matchesMask[i] = [1, 0]
+        # 如果第一个邻近距离比第二个邻近距离的0.7倍小，则保留
+        draw_params = dict(matchColor=(0, 255, 0), singlePointColor=(255, 0, 0), matchesMask=matchesMask, flags=0)
+        img3 = cv2.drawMatchesKnn(ob1, keyp1, ob2, keyp2, matches, None, **draw_params)
+        a = len(keyp1) // len(keyp2)
+        plt.figure(figsize=(8, 8))
+        plt.subplot(211)
+        plt.imshow(img3)
+        plt.subplot(212)
+        plt.text(0.5, 0.6, "the number of sticks:" + str(a), size=30, ha="center", va="center")
+        plt.axis('off')
+        plt.show()
+        cv2.imwrite(self.output+"/counter_sticks_image1.jpg", img3)
 
 if __name__ == '__main__':
     ob = processing_image()
@@ -211,4 +252,4 @@ if __name__ == '__main__':
     # ob.op_first_to_three_type()
     # ob.op_cutting_image()
     # ob.op_edge_test()
-    ob.op_trans_plot()
+    ob.op_counter()
