@@ -82,9 +82,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 person_1 = cv2.imread("edge_processing1.jpg", cv2.IMREAD_GRAYSCALE)
+person_1 = cv2.dilate(person_1, None, iterations=1)
+person_1 = cv2.erode(person_1, None, iterations=1)
 
-# person_1 = cv2.erode(person_1, None, iterations=2)
-# person_1 = cv2.dilate(person_1, None, iterations=2)
 person_2 = cv2.imread("icon4.jpg", cv2.IMREAD_GRAYSCALE)
 # person_2 = cv2.erode(person_2, None, iterations=5)
 # person_2 = cv2.dilate(person_2, None, iterations=2)

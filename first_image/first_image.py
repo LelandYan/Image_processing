@@ -217,6 +217,8 @@ class processing_image:
         ob1 = cv2.imread("./raw_data/edge_processing1.jpg", cv2.IMREAD_GRAYSCALE)
         # person_1 = cv2.erode(person_1, None, iterations=2)
         # person_1 = cv2.dilate(person_1, None, iterations=2)
+        ob1 = cv2.dilate(ob1, None, iterations=1)
+        ob1 = cv2.erode(ob1, None, iterations=1)
         ob2 = cv2.imread("./raw_data/icon4.jpg", cv2.IMREAD_GRAYSCALE)
         # person_2 = cv2.erode(person_2, None, iterations=5)
         # person_2 = cv2.dilate(person_2, None, iterations=2)
