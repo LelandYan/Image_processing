@@ -12,9 +12,10 @@ mpl.rcParams['font.sans-serif'] = ['SimHei']
 
 
 class processing_image:
-    def __init__(self, filename="./raw_data/1.jpg", output="./out_data"):
+    def __init__(self, filename="./raw_data/timg.jpg", output="./out_data",icon="./raw_data/icon_timg.jpg"):
         self.filename = filename
         self.output = output
+        self.icon = icon
 
     def op_gray_to_four_type(self, kernel=(9, 9), erode_iter=5, dilate_iter=5):
 
@@ -80,7 +81,7 @@ class processing_image:
             return binary
 
         if flag:
-            src = cv2.imread("./out_data/gray_cutting_image1.jpg")
+            src = cv2.imread("./out_data/gradient_image1.jpg")
         else:
             src = cv2.imread(self.filename)
         src = cv2.cvtColor(src, cv2.COLOR_BGR2RGB)
@@ -198,7 +199,7 @@ class processing_image:
         canny_edge_test()
 
     def op_trans_plot(self):
-        im_in = cv2.imread("./out_data/custom_binary_first1.jpg", cv2.IMREAD_GRAYSCALE)
+        im_in = cv2.imread("./out_data/global_binary_first1.jpg", cv2.IMREAD_GRAYSCALE)
         th, im_th = cv2.threshold(im_in, 220, 255, cv2.THRESH_BINARY_INV)
 
         # Copy the thresholded image.
@@ -219,7 +220,7 @@ class processing_image:
         ob1 = cv2.bilateralFilter(ob1, 7, sigmaSpace=70, sigmaColor=70)
         ob1 = cv2.erode(ob1, None, iterations=2) # 1 # 2
         ob1 = cv2.dilate(ob1, None, iterations=2)
-        ob2 = cv2.imread("./out_data/icon4.jpg", cv2.IMREAD_GRAYSCALE)
+        ob2 = cv2.imread(self.icon, cv2.IMREAD_GRAYSCALE)
         # ob2 = cv2.bilateralFilter(ob2, 7, sigmaSpace=60, sigmaColor=60)
         ob2 = cv2.erode(ob2, None, iterations=1)
         # ob2 = cv2.dilate(ob2, None, iterations=1)
@@ -250,11 +251,11 @@ class processing_image:
         cv2.imwrite(self.output+"/counter_sticks_image1.jpg", img3)
 
 if __name__ == '__main__':
-    ob = processing_image()
+    ob = processing_image(filename="./raw_data/timg.jpg",icon="./raw_data/icon_timg.jpg")
     ob.op_gray_to_four_type()
     ob.op_first_to_three_type()
     # ob.op_cutting_image()
     ob.op_edge_test()
-    ob.op_trans_plot()
     ob.op_first_to_three_type(flag=True)
+    ob.op_trans_plot()
     ob.op_counter()

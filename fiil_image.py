@@ -61,7 +61,7 @@ import random
 #     cv2.destroyAllWindows()
 
 
-im_in = cv2.imread("binary_first111.jpg", cv2.IMREAD_GRAYSCALE)
+im_in = cv2.imread("binary_first1111.jpg", cv2.IMREAD_GRAYSCALE)
 
 # Threshold.
 # Set values equal to or above 220 to 0.
@@ -80,7 +80,7 @@ mask = np.zeros((h + 2, w + 2), np.uint8)
 # Floodfill from point (0, 0)
 cv2.floodFill(im_floodfill, mask, (0, 0), 255)
 # Display images.
-cv2.imwrite("edge_processing1111.jpg",im_floodfill)
+cv2.imwrite("edge_processing11111.jpg",im_floodfill)
 # cv2.imshow("Thresholded Image", im_th)
 # cv2.imshow("Floodfilled Image", im_floodfill)
 # cv2.imshow("Inverted Floodfilled Image", im_floodfill_inv)

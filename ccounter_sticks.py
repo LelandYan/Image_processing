@@ -86,13 +86,13 @@ import matplotlib.pyplot as plt
 
 
 
-person_1 = cv2.imread("edge_processing1111.jpg", cv2.IMREAD_GRAYSCALE)
+person_1 = cv2.imread("edge_processing11111.jpg", cv2.IMREAD_GRAYSCALE)
 person_1 = cv2.bilateralFilter(person_1, 7, sigmaSpace=70, sigmaColor=70)
 person_1 = cv2.erode(person_1, None, iterations=2)  # 1 # 2
 person_1 = cv2.dilate(person_1, None, iterations=2)
 
 
-person_2 = cv2.imread("icon6.jpg", cv2.IMREAD_GRAYSCALE)
+person_2 = cv2.imread("icon12.png", cv2.IMREAD_GRAYSCALE)
 person_2 = cv2.erode(person_2, None, iterations=1)
 # person_2 = cv2.erode(person_2, None, iterations=5)
 # person_2 = cv2.dilate(person_2, None, iterations=2)
