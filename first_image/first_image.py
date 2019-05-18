@@ -215,13 +215,14 @@ class processing_image:
 
     def op_counter(self):
         ob1 = cv2.imread("./raw_data/edge_processing1.jpg", cv2.IMREAD_GRAYSCALE)
-        # person_1 = cv2.erode(person_1, None, iterations=2)
-        # person_1 = cv2.dilate(person_1, None, iterations=2)
-        ob1 = cv2.dilate(ob1, None, iterations=1)
-        ob1 = cv2.erode(ob1, None, iterations=1)
+        # ob1 = cv2.dilate(ob1, None, iterations=2)
+        ob1 = cv2.bilateralFilter(ob1, 7, sigmaSpace=70, sigmaColor=70)
+        ob1 = cv2.erode(ob1, None, iterations=2) # 1 # 2
+        ob1 = cv2.dilate(ob1, None, iterations=2)
         ob2 = cv2.imread("./raw_data/icon4.jpg", cv2.IMREAD_GRAYSCALE)
-        # person_2 = cv2.erode(person_2, None, iterations=5)
-        # person_2 = cv2.dilate(person_2, None, iterations=2)
+        # ob2 = cv2.bilateralFilter(ob2, 7, sigmaSpace=60, sigmaColor=60)
+        ob2 = cv2.erode(ob2, None, iterations=1)
+        # ob2 = cv2.dilate(ob2, None, iterations=1)
         # orb = cv2.xfeatures2d.SURF_create()
         orb = cv2.xfeatures2d.SIFT_create()
         keyp1, desp1 = orb.detectAndCompute(ob1, None)
@@ -250,8 +251,8 @@ class processing_image:
 
 if __name__ == '__main__':
     ob = processing_image()
-    # ob.op_gray_to_four_type()
-    # ob.op_first_to_three_type()
-    # ob.op_cutting_image()
-    # ob.op_edge_test()
+    ob.op_gray_to_four_type()
+    ob.op_first_to_three_type()
+    ob.op_cutting_image()
+    ob.op_edge_test()
     ob.op_counter()

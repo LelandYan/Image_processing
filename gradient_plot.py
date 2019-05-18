@@ -4,7 +4,7 @@ __date__ = '2019/5/15 17:02'
 
 import cv2
 import matplotlib.pyplot as plt
-img = cv2.imread("gradient_image.jpg")
+img = cv2.imread("22.jpg")
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 blurred = cv2.GaussianBlur(gray, (9, 9),0)
 ret, binary = cv2.threshold(blurred, 127, 255, cv2.THRESH_BINARY)

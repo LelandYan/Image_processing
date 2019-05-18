@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-img = cv2.imread("1.jpg")
+img = cv2.imread("timg.jpg")
 # img = cv2.imread("processing_image1.jpg")
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 # img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
@@ -23,6 +23,7 @@ img_blackhat = cv2.morphologyEx(img, op= cv2.MORPH_BLACKHAT, kernel=kernel)
 images = [img, img_open, img_close, img_grad,
           img_tophat, img_blackhat]
 names = ["raw_img","img_open","img_close","img_grad","img_tophat","img_blackhat"]
+cv2.imwrite("4444.jpg",img_grad)
 fig, axs = plt.subplots(nrows = 2, ncols = 3, figsize = (15, 15))
 for ind, p in enumerate(images):
     ax = axs[ind//3, ind%3]
