@@ -251,7 +251,7 @@ class processing_image:
         cv2.imwrite(self.output+"/counter_sticks_image1.jpg", img3)
 
 if __name__ == '__main__':
-    ob = processing_image(filename="./raw_data/timg.jpg",icon="./raw_data/icon_timg.jpg")
+    ob = processing_image(filename="./raw_data/timber4.jpg",icon="./raw_data/icon_timgber4.png")
     ob.op_gray_to_four_type()
     ob.op_first_to_three_type()
     # ob.op_cutting_image()

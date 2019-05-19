@@ -64,6 +64,7 @@ class processing_image:
             gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)  # 把输入图像灰度化
             # 自适应阈值化能够根据图像不同区域亮度分布，改变阈值
             binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 25, 10)
+
             if flag:
                 cv2.imwrite(self.output + "/local_binary_first1.jpg", binary)
             return binary
