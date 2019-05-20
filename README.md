@@ -1,1 +1,1 @@
-# Image_processing
+## the model of counting the sticks
