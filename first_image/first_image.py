@@ -220,7 +220,7 @@ class processing_image:
         ob1 = cv2.bilateralFilter(ob1, 7, sigmaSpace=70, sigmaColor=70)
         ob1 = cv2.erode(ob1, None, iterations=2) # 1 # 2
         ob1 = cv2.dilate(ob1, None, iterations=2)
-        ob2 = cv2.imread("./out_data/icon4.jpg", cv2.IMREAD_GRAYSCALE)
+        ob2 = cv2.imread("./raw_data/icon4.jpg", cv2.IMREAD_GRAYSCALE)
         # ob2 = cv2.bilateralFilter(ob2, 7, sigmaSpace=60, sigmaColor=60)
         ob2 = cv2.erode(ob2, None, iterations=1)
         # ob2 = cv2.dilate(ob2, None, iterations=1)
