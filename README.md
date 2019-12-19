@@ -49,7 +49,9 @@ pip install opencv-contrib-python==3.4.2.16 -i "https://pypi.doubanio.com/simple
 
 2. **模型二**基于环境（光照）对影响计数较大且辨别较难的图片进行木材计数模型如下图：
 
-   <img src="first_image/raw_data/1.JPG" alt="Image text" style="zoom:25%;" width="200px" height="120px">
+   
+
+   <img src="first_image/raw_data/1.JPG" alt="Image text" style="zoom:25%;" width="600px" height="360px">
 
    具体代码见first_iamge文件中的first_image.py,第二个模型实现了有关的自动化脚本的功能。
 
@@ -83,7 +85,7 @@ counter_sticks.py 、edge_cutting.py、last_test.py、main.py、test2.py、test4
 
 处理原图为：
 
-<img src="first_image/raw_data/1.JPG" alt="Image text" style="zoom:25%;"  width="200px" height="120px"/>
+<img src="first_image/raw_data/1.JPG" alt="Image text" style="zoom:25%;" width="600px" height="360px"/>
 
 预处理流程图如下：
 
