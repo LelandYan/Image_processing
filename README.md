@@ -1,4 +1,31 @@
-## the models of counting the sticks
+# 基于物体轮廓检测和特征提取的木材图像计数模型
 
-1. the first model for the image edge deactive and feature extraction  code for the dirctory named first_image(first.py...) the input data is the directory named raw_data ,the output data is the dirctory named out_data
-2. the second model for the common processing image code for the dirctory named other_image(main.py...) the input data is the directory named raw_data ,the output data is the dirctory named out_data
+​	**模型解决问题：使用计算机算法来处理木材照片，从照片中直接计算得知木	材的数量。**
+
+#### 	一.运行环境配置
+
+1. python==3.6
+2. Opencv==3.4.3.18
+3. matplotlib==3.1.1
+4. .....
+
+具体详细库信息配置见requirements.txt.
+
+可以使用下面命令直接配置相关环境。
+
+```python
+pip install -r requirements.txt
+```
+
+#### 二.程序整体代码说明
+
+本程序分为两部分：
+
+1. 基于环境对计数影响不大其检测目标较为清晰辨别的图片进行木材计数模型如下图：具体代码见other_image文件中的代码。
+
+   ![Image text](imgs/1.png)
+
+2. 基于环境（光照）对影响计数较大且辨别较难的图片进行木材计数模型如下图：具体代码见first_iamge文件中代码
+
+   ![Image text](imgs/2.jpg)
+

@@ -6,7 +6,7 @@ import cv2
 import matplotlib.pyplot as plt
 import copy
 from pylab import mpl
-
+import skimage
 # 防止中文乱码
 mpl.rcParams['font.sans-serif'] = ['SimHei']
 
