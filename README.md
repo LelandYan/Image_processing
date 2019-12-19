@@ -49,7 +49,7 @@ pip install opencv-contrib-python==3.4.2.16 -i "https://pypi.doubanio.com/simple
 
 2. **模型二**基于环境（光照）对影响计数较大且辨别较难的图片进行木材计数模型如下图：
 
-   ![Image text](imgs/2.jpg)
+   ![Image text](first_image/raw_data/1.jpg)
 
    具体代码见first_iamge文件中的first_image.py,第二个模型实现了有关的自动化脚本的功能。
 
