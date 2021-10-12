@@ -13,7 +13,7 @@ mkl-service==2.3.0
 networkx==2.3
 numpy==1.17.3
 olefile==0.46
-opencv-contrib-python==3.4.2.16
+opencv-contrib-python==4.2.0.32
 opencv-python==3.4.2.16
 Pillow==6.2.0
 pyparsing==2.4.2
