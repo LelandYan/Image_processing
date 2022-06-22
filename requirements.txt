@@ -11,7 +11,7 @@ mkl-fft==1.0.14
 mkl-random==1.1.0
 mkl-service==2.3.0
 networkx==2.3
-numpy==1.17.3
+numpy==1.22.0
 olefile==0.46
 opencv-contrib-python==3.4.2.16
 opencv-python==3.4.2.16
